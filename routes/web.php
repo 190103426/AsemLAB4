@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
-use App\Model\Post;
+use App\Models\Post;
+
+use App\Http\Controllers\PostController;
 
 
 /*
@@ -19,21 +21,34 @@ use App\Model\Post;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
-Route::get('/main', function(){
-    return view('main');
-});
+Route::get('/user', function() {
+    return view('user');
+})->name('user');
 
-Route::get('post\add', function(){
+Route::get('/html', function() {
+    return view('html');
+})->name('html');
+
+Route::get('/about', function() {
+    return view('about');
+})->name('about');
+
+Route::get('/portfolio', function() {
+    return view('portfolio');
+})->name('portfolio');
+
+Route::get('/contact', function() {
+    return view('contact');
+})->name('contact');
+
+Route::get('post/add', function(){
     DB::table('post')->insert([
         'title' => 'SDU',
-        'body' => 'Suleyman Demirel University (SDU) is one of the first private higher education institutions in Kazakhstan. It is situated in the mountainous town of Kaskelen, 20km from Almaty city center. The University was founded in 1996 and opened by the president of the country Nursultan Nazarbayev. SDU currently has four faculties: Education & Humanities, Engineering & Natural Sciences, Law & Social Sciences, and the Business School.'
+        'body' => 'Suleyman Demirel University (SDU)'
     ]);
 });
 
-Route::get('post', function () { 
-    $post = Post::find(1); 
-    return $post;
-});
+Route::get('post', [PostController::class, 'index']);
 
