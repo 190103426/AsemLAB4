@@ -30,7 +30,7 @@ class PostController extends Controller
         $post = Post::find($id);
 
         if($post == null)
-        return response(['massage' => 'post not found'], 404);
+        return response(['massage'=>'post not found'],404);
 
         return view('post.detail')->with(['post'=>$post]);
     }
